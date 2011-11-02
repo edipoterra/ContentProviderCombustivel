@@ -45,13 +45,22 @@
   <Spinner
     android:layout_height="wrap_content"
     android:layout_width="fill_parent"
-    android:id="@+id/comboCombus">
+    android:id="@+id/comboCombus"
+    android:prompt="@string/combus_prompt">
   </Spinner>
   <Button
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:id="@+id/gravar"
-    android:text="Gravar">
+    android:text="Gravar"
+    android:onClick="gravarCombustivel">
+  </Button>
+  <Button
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/excluir"
+    android:text="Excluir"
+    android:onClick="excluirCombustivel">
   </Button>
 </LinearLayout>
 

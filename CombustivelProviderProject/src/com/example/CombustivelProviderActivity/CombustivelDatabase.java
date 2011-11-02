@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import java.util.Date;
 
 public class CombustivelDatabase extends SQLiteOpenHelper {
   
@@ -23,9 +24,9 @@ public class CombustivelDatabase extends SQLiteOpenHelper {
 
   	@Override
   	public void onCreate(SQLiteDatabase db) {
-    	db.execSQL("CREATE TABLE " + combustivelTable + " ("
+    	db.execSQL("CREATE TABLE " + combustivelTable + " (" +
         	colID + "INTEGER PRIMARY KEY , " + 
-        	colData + " DATE, " + 
+        	colData + " STRING, " + 
         	colOdometro + "FLOAT, " + 
         	colLitros + " FLOAT, " + 
         	colCombustivel + " INTEGER)");
@@ -36,34 +37,34 @@ public class CombustivelDatabase extends SQLiteOpenHelper {
     	onCreate(db);
   	}
 
-  	void adicionaCombustivel(CombustivelProviderActivity combustivel){
-	   	SQLiteDatabase db = this.getWritableDatabase();
-    	ContentValues cv = new ContentValues();
-    	cv.put(colData, combustivel.getData());
-    	cv.put(colOdometro, combustivel.getOdometro());
-    	cv.put(colLitros, combustivel.getLitros());
-		cv.put(colCombustivel, combustivel.getCombustivel());
-    	db.insert(combustivelTable, colData, cv);
-    	db.close();
+  	void adicionaCombustivel(Combustivel combustivel){
+	   	  SQLiteDatabase db = this.getWritableDatabase();
+    	  ContentValues cv = new ContentValues();
+    	  cv.put(colData, combustivel.getData().toString());
+    	  cv.put(colOdometro, combustivel.getOdometro());
+    	  cv.put(colLitros, combustivel.getLitros());
+		    cv.put(colCombustivel, combustivel.getCombustivel());
+    	  db.insert(combustivelTable, colData, cv);
+    	  db.close();
   	}
 
-  	Cursor getAllCombustivel(){
-    	SQLiteDatabase db=this.getWritableDatabaseetWritableDatabase();
-    	Cursor cur= db.rawQuery("SELECT * FROM "+ combustivelTable,null);
-	    return cur;
+  	public Cursor getAllCombustivel(){
+    	  SQLiteDatabase db = this.getWritableDatabase();
+    	  Cursor cur = db.rawQuery("SELECT * FROM "+ combustivelTable,null);
+	      return cur;
   	}
 
-	public int atualizaCombustivel(CombustivelProviderActivity combustivel){
-		SQLiteDatabase db=this.getWritableDatabase();
-		ContentValues cv = new ContentValues();
-    	cv.put(colData, combustivel.getData());
+	public int atualizaCombustivel(Combustivel combustivel){
+		  SQLiteDatabase db = this.getWritableDatabase();
+		  ContentValues cv = new ContentValues();
+    	cv.put(colData, combustivel.getData().toString());
     	cv.put(colOdometro, combustivel.getOdometro());
     	cv.put(colLitros, combustivel.getLitros());
-		cv.put(colCombustivel, combustivel.getCombustivel());		
-		return db.update(combustivelTable, cv, colID+"=?", new String []{String.valueOf(combustivel.get_id())}); 
+		  cv.put(colCombustivel, combustivel.getCombustivel());		
+		  return db.update(combustivelTable, cv, colID+"=?", new String []{String.valueOf(combustivel.get_id())}); 
 	}
 	 
-	public void removeCombustivel(CombustivelProviderActivity combustivel){
+	public void removeCombustivel(Combustivel combustivel){
 		SQLiteDatabase db=this.getWritableDatabase();
 		db.delete(combustivelTable,colID+"=?", new String [] {String.valueOf(combustivel.get_id())});
 		db.close();

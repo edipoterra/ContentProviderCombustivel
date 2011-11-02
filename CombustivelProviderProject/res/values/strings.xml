@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">CombustivelProviderActivity</string>
+  <string name="app_name">CombustivelProviderActivity</string>
+  <string name="combus_prompt">Selecione o Combustivel</string>
+    <string-array name="combus_array">
+      <item>Alcool</item>
+      <item>Gasolina</item>
+      <item>Diesel</item>
+      <item>Gas Natural</item>
+      <item>Alcool + Gasolina</item>
+    </string-array>
 </resources>
